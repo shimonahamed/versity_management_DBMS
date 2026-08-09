@@ -90,7 +90,7 @@ INSERT INTO `department` (`id`, `department_name`, `department_code`, `slug`, `s
 CREATE TABLE `semester` (
   `id` int UNSIGNED NOT NULL,
   `semester_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `semester_code` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `semester_code` int NOT NULL,
   `semester_number` int NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1=Active, 0=Inactive',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
