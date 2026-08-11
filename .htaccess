@@ -1,0 +1,15 @@
+
+# --------------------------------------------------
+# Existing files/folders থাকলে normally access হবে
+# --------------------------------------------------
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+
+# --------------------------------------------------
+# অন্য সব URL 404.php তে যাবে
+# --------------------------------------------------
+
+RewriteRule ^ 404.php [L]

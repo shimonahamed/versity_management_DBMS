@@ -1,20 +1,15 @@
 <?php
 require_once "../config/database.php";
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/navbar.php';
 
 $query = "SELECT * FROM department ORDER BY id DESC";
 $result = mysqli_query($conn, $query);
 ?>
 
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <title>Department List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-
-<div class="container py-5">
+    <div class="main-content">
+        <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Department List</h2>
         <a href="create.php" class="btn btn-primary">+ Add New Department</a>
@@ -78,7 +73,13 @@ $result = mysqli_query($conn, $query);
         </div>
     </div>
 </div>
+</div>
 <script>
+    if (window.history.replaceState) {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('status');
+        window.history.replaceState(null, null, url.pathname);
+    }
     setTimeout(function () {
         const alert = document.getElementById('status-alert');
 
@@ -91,5 +92,4 @@ $result = mysqli_query($conn, $query);
         }
     }, 3000);
 </script>
-</body>
-</html>
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
