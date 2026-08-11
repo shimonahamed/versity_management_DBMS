@@ -1,7 +1,6 @@
 <?php
 require_once "../config/database.php";
 
-// ডাটাবেজ থেকে সব ডিপার্টমেন্ট তুলে আনা
 $query = "SELECT * FROM department ORDER BY id DESC";
 $result = mysqli_query($conn, $query);
 ?>

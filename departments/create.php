@@ -1,15 +1,15 @@
 <?php
-// ১. ব্রাউজারে আসল এরর মেসেজটি ফুটিয়ে তোলার জন্য
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// ২. ডাটাবেজ ফাইল অন্তর্ভুক্ত করা
+
 require_once "../config/database.php";
 
 $message = "";
 
-// ফর্মের মান ধরে রাখার জন্য
+
 $department_name = "";
 $department_code = "";
 $slug            = "";
@@ -39,14 +39,14 @@ if (isset($_POST['submit'])) {
             }
         } catch (Exception $e) {
             if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
-                $message = "এই Slug বা Department Code-টি ইতিমধ্যে ডাটাবেজে রয়েছে।";
+                $message = "The Slug or Department Code already exists in the database";
             } else {
                 $message = "Database Error: " . $e->getMessage();
             }
         }
 
     } else {
-        $message = "সবগুলো ঘর সঠিকভাবে পূরণ করুন।";
+        $message = "Please fill in all the fields correctly";
     }
 }
 ?>

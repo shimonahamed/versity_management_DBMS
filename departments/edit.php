@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
     }
 }
 
-// আগের ডাটা ফেস করা
+
 $select_query = "SELECT * FROM department WHERE id = $id";
 $result = mysqli_query($conn, $select_query);
 $department = mysqli_fetch_assoc($result);

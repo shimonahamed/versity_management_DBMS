@@ -29,14 +29,14 @@ if (isset($_POST['submit'])) {
             }
         } catch (Exception $e) {
             if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
-                $message = "এই Session Code বা Name-টি ইতিমধ্যে বিদ্যমান।";
+                $message = "This Session Code or Name already exists.";
             } else {
                 $message = "Database Error: " . $e->getMessage();
             }
         }
 
     } else {
-        $message = "সবগুলো ঘর পূরণ করুন।";
+        $message = "Please fill in all the fields";
     }
 }
 ?>

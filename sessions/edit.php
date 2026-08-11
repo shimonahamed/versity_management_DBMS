@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
         }
 
     } else {
-        $message = "সবগুলো ঘর পূরণ করুন।";
+        $message = "Please fill in all the fields";
     }
 }
 
