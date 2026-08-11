@@ -8,49 +8,49 @@
     <ul class="sidebar-menu">
 
         <li>
-            <a href="/university_management/">
+            <a href="/versity_management_DBMS/">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
         </li>
 
         <li>
-            <a href="/university_management/students/index.php">
+            <a href="/versity_management_DBMS/students/index.php">
                 <i class="fas fa-user-graduate"></i>
                 <span>Students</span>
             </a>
         </li>
 
         <li>
-            <a href="/university_management/departments/index.php">
+            <a href="/versity_management_DBMS/departments/index.php">
                 <i class="fas fa-building"></i>
                 <span>Departments</span>
             </a>
         </li>
 
         <li>
-            <a href="/university_management/courses/index.php">
+            <a href="/versity_management_DBMS/courses/index.php">
                 <i class="fas fa-book"></i>
                 <span>Courses</span>
             </a>
         </li>
 
         <li>
-            <a href="/university_management/semesters/index.php">
+            <a href="/versity_management_DBMS/semesters/index.php">
                 <i class="fas fa-calendar"></i>
                 <span>Semesters</span>
             </a>
         </li>
 
         <li>
-            <a href="/university_management/sessions/index.php">
+            <a href="/versity_management_DBMS/sessions/index.php">
                 <i class="fas fa-clock"></i>
                 <span>Sessions</span>
             </a>
         </li>
 
         <li>
-            <a href="/university_management/registrations/index.php">
+            <a href="/versity_management_DBMS/registrations/index.php">
                 <i class="fas fa-clipboard-list"></i>
                 <span>Registrations</span>
             </a>
