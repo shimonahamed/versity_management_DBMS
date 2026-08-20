@@ -1,8 +1,11 @@
 <div class="sidebar">
 
     <div class="sidebar-header">
-        <h4>University</h4>
-        <small>Management System</small>
+        <img src="/versity_management_DBMS/assets/images/northern-university-logo.png" alt="Northern University logo" class="sidebar-logo">
+<!--        <div class="sidebar-title">-->
+<!--            <h4>Northern University</h4>-->
+<!--            <small>Management System</small>-->
+<!--        </div>-->
     </div>
 
     <ul class="sidebar-menu">

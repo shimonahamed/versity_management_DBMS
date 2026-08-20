@@ -250,14 +250,35 @@ body {
 /* Sidebar Header */
 
 .sidebar-header {
-    height: 70px;
+    height: 90px;
 
-    padding: 15px 20px;
+    padding: 8px 20px;
 
     border-bottom: 1px solid #334155;
 
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.sidebar-logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: #ffffff;
+    margin-right: 0;
+}
+
+.sidebar-title h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sidebar-title small {
+    color: #cbd5e1;
+    font-size: 11px;
 }
 
 .sidebar-header h4 {
@@ -415,6 +436,105 @@ body {
     text-decoration: none;
 }
 
+/* Dashboard overview */
+.dashboard-overview {
+    max-width: 1440px;
+}
+
+.dashboard-hero {
+    min-height: 190px;
+    padding: 34px 42px;
+    border-radius: 18px;
+    color: #ffffff;
+    background: linear-gradient(120deg, #162c52 0%, #1d4f91 58%, #2563b8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 12px 28px rgba(29, 79, 145, 0.2);
+}
+
+.dashboard-hero::after {
+    content: '';
+    width: 270px;
+    height: 270px;
+    position: absolute;
+    top: -115px;
+    right: 80px;
+    border: 35px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+}
+
+.dashboard-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #cce1ff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .7px;
+    text-transform: uppercase;
+}
+
+.dashboard-eyebrow i { color: #66e3a4; font-size: 8px; }
+.dashboard-hero h1 { margin: 10px 0 7px; font-size: 30px; font-weight: 700; }
+.dashboard-hero p { margin: 0; color: #d9e9ff; font-size: 15px; }
+
+.dashboard-hero-icon {
+    width: 94px;
+    height: 94px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.13);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    z-index: 1;
+}
+
+.dashboard-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 34px 0 19px;
+}
+
+.dashboard-section-heading h2 { margin: 0 0 3px; font-size: 21px; font-weight: 700; }
+.dashboard-section-heading p { margin: 0; color: #718096; font-size: 14px; }
+.dashboard-section-heading > span { color: #64748b; font-size: 13px; }
+
+.overview-card {
+    min-height: 156px;
+    padding: 23px;
+    border: 1px solid #e7edf5;
+    border-radius: 15px;
+    background: #ffffff;
+    color: #1e293b;
+    display: flex;
+    align-items: flex-start;
+    gap: 17px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, .035);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.overview-card:hover { color: #1e293b; transform: translateY(-5px); box-shadow: 0 13px 24px rgba(15, 23, 42, .1); }
+.overview-icon { width: 51px; height: 51px; flex: 0 0 51px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 21px; }
+.overview-content { display: flex; flex-direction: column; }
+.overview-content small { color: #718096; font-size: 13px; font-weight: 600; }
+.overview-content strong { margin: 3px 0 8px; font-size: 31px; line-height: 1; }
+.overview-content em { color: #64748b; font-size: 12px; font-style: normal; }
+.overview-content em i { margin-left: 4px; transition: transform .2s ease; }
+.overview-card:hover em i { transform: translateX(4px); }
+
+.students-card .overview-icon { color: #2563eb; background: #e9f1ff; }
+.departments-card .overview-icon { color: #8b5cf6; background: #f1ebff; }
+.courses-card .overview-icon { color: #0f9f6e; background: #e5f8f0; }
+.registrations-card .overview-icon { color: #e47c18; background: #fff2df; }
+.semesters-card .overview-icon { color: #db3b73; background: #ffebf2; }
+.sessions-card .overview-icon { color: #1596ad; background: #e3f7fa; }
+
 
 /* ========================================
    FOOTER
@@ -477,9 +597,12 @@ body.sidebar-collapsed .sidebar-header {
     padding: 15px 5px;
 }
 
-body.sidebar-collapsed .sidebar-header h4,
-body.sidebar-collapsed .sidebar-header small {
+body.sidebar-collapsed .sidebar-title {
     display: none;
+}
+
+body.sidebar-collapsed .sidebar-logo {
+    margin-right: 0;
 }
 
 body.sidebar-collapsed .sidebar-menu {
