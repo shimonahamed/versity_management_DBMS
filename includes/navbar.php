@@ -1,7 +1,7 @@
 <div class="sidebar">
 
     <div class="sidebar-header">
-        <img src="/versity_management_DBMS/assets/images/northern-university-logo.png" alt="Northern University logo" class="sidebar-logo">
+        <img src="/versity_management_DBMS/assets/images/northern-university-logo.png" alt="Northern University logo" class="sidebar-logo" style="width: 80px; height: 80px">
 <!--        <div class="sidebar-title">-->
 <!--            <h4>Northern University</h4>-->
 <!--            <small>Management System</small>-->
@@ -56,6 +56,19 @@
             <a href="/versity_management_DBMS/registrations/index.php">
                 <i class="fas fa-clipboard-list"></i>
                 <span>Registrations</span>
+            </a>
+        </li>
+        <p class="text-mute">Reports</p>
+        <li>
+            <a href="/versity_management_DBMS/reports/registration_report.php">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Registrations Report</span>
+            </a>
+        </li>
+        <li>
+            <a href="/versity_management_DBMS/reports/student_report.php">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Student Report</span>
             </a>
         </li>
 
