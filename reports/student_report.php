@@ -47,58 +47,58 @@ $statusMap = [
     4 => ['label' => 'Dropout',  'class' => 'bg-danger'],
 ];
 ?>
-    <div class="main-content">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>Student Report</h2>
-                <a href="/versity_management_DBMS/students/index.php" class="btn btn-secondary">Back to List</a>
-            </div>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Student Report</h2>
+            <a href="/versity_management_DBMS/students/index.php" class="btn btn-secondary">Back to List</a>
+        </div>
 
-            <!-- Filter Form -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-body">
-                    <form method="GET" action="">
-                        <div class="row g-3 align-items-end">
-                            <div class="col-md-4">
-                                <label class="form-label">Session</label>
-                                <select name="session_id" class="form-select">
-                                    <option value="">-- All Sessions --</option>
-                                    <?php while ($ses = mysqli_fetch_assoc($sessions)): ?>
-                                        <option value="<?= $ses['id'] ?>" <?= $session_id == $ses['id'] ? 'selected' : '' ?>>
-                                            <?= htmlspecialchars($ses['session_name']) ?>
-                                        </option>
-                                    <?php endwhile; ?>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Department</label>
-                                <select name="department_id" class="form-select">
-                                    <option value="">-- All Departments --</option>
-                                    <?php while ($dept = mysqli_fetch_assoc($departments)): ?>
-                                        <option value="<?= $dept['id'] ?>" <?= $department_id == $dept['id'] ? 'selected' : '' ?>>
-                                            <?= htmlspecialchars($dept['department_name']) ?>
-                                        </option>
-                                    <?php endwhile; ?>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary w-100">Search</button>
-                            </div>
+        <!-- Filter Form -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <form method="GET" action="">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-4">
+                            <label class="form-label">Session</label>
+                            <select name="session_id" class="form-select">
+                                <option value="">-- All Sessions --</option>
+                                <?php while ($ses = mysqli_fetch_assoc($sessions)): ?>
+                                    <option value="<?= $ses['id'] ?>" <?= $session_id == $ses['id'] ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($ses['session_name']) ?>
+                                    </option>
+                                <?php endwhile; ?>
+                            </select>
                         </div>
-                        <?php if ($filtered): ?>
-                            <div class="mt-2">
-                                <a href="/versity_management_DBMS/students/index.php" class="btn btn-sm btn-outline-secondary">Clear Filters</a>
-                            </div>
-                        <?php endif; ?>
-                    </form>
-                </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Department</label>
+                            <select name="department_id" class="form-select">
+                                <option value="">-- All Departments --</option>
+                                <?php while ($dept = mysqli_fetch_assoc($departments)): ?>
+                                    <option value="<?= $dept['id'] ?>" <?= $department_id == $dept['id'] ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($dept['department_name']) ?>
+                                    </option>
+                                <?php endwhile; ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary w-100">Search</button>
+                        </div>
+                    </div>
+                    <?php if ($filtered): ?>
+                        <div class="mt-2">
+                            <a href="/versity_management_DBMS/students/index.php" class="btn btn-sm btn-outline-secondary">Clear Filters</a>
+                        </div>
+                    <?php endif; ?>
+                </form>
             </div>
+        </div>
 
-            <?php if ($filtered): ?>
-                <div class="card shadow-sm">
-                    <div class="card-body p-0">
-                        <table class="table table-striped table-hover mb-0">
-                            <thead class="table-dark">
+        <?php if ($filtered): ?>
+            <div class="card shadow-sm">
+                <div class="card-body p-0">
+                    <table class="table table-striped table-hover mb-0">
+                        <thead class="table-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Student Name</th>
@@ -110,8 +110,8 @@ $statusMap = [
                                 <th>Admission Date</th>
                                 <th>Status</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+                        <tbody>
                             <?php $sl = 1; ?>
                             <?php if (mysqli_num_rows($result) > 0): ?>
                                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
@@ -133,13 +133,13 @@ $statusMap = [
                                     <td colspan="9" class="text-center py-3">No students found for the selected filters.</td>
                                 </tr>
                             <?php endif; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
-            <?php else: ?>
-                <div class="alert alert-info">Please select at least one filter (Session or Department) to view the report.</div>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php else: ?>
+            <div class="alert alert-info">Please select at least one filter (Session or Department) to view the report.</div>
+        <?php endif; ?>
     </div>
+</div>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

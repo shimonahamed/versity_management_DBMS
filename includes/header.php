@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/security.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +28,7 @@
                     <i class="fas fa-bars"></i>
                 </button>
 
-                <a href="/university_management/" class="brand">
+                <a href="/versity_management_DBMS/" class="brand">
                     <div class="brand-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
@@ -59,8 +60,8 @@
                         </div>
 
                         <div class="user-info text-start ms-2 d-none d-md-block">
-                            <strong>Super Admin</strong>
-                            <small>Administrator</small>
+                            <strong><?= htmlspecialchars($_SESSION['username'] ?? 'Administrator') ?></strong>
+                            <small><?= htmlspecialchars($_SESSION['user_email'] ?? 'Signed in') ?></small>
                         </div>
 
                         <i class="fas fa-chevron-down ms-3"></i>
@@ -68,14 +69,14 @@
 
                     <ul class="dropdown-menu dropdown-menu-end shadow border-0">
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/versity_management_DBMS/users/view.php?id=<?= (int) ($_SESSION['user_id'] ?? 0) ?>">
                                 <i class="fas fa-user me-2"></i>
                                 Profile
                             </a>
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/versity_management_DBMS/users/edit.php?id=<?= (int) ($_SESSION['user_id'] ?? 0) ?>">
                                 <i class="fas fa-cog me-2"></i>
                                 Settings
                             </a>
@@ -84,10 +85,13 @@
                         <li><hr class="dropdown-divider"></li>
 
                         <li>
-                            <a class="dropdown-item text-danger" href="#">
+                            <form method="post" action="/versity_management_DBMS/logout.php">
+                                <?= csrf_field() ?>
+                            <button class="dropdown-item text-danger" type="submit">
                                 <i class="fas fa-sign-out-alt me-2"></i>
                                 Logout
-                            </a>
+                            </button>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -103,6 +107,6 @@
 
 <script>
     document.getElementById('sidebarToggle').addEventListener('click', function () {
-        document.body.classList.toggle('sidebar-collapsed');
+        document.body.classList.toggle(window.innerWidth <= 768 ? 'sidebar-open' : 'sidebar-collapsed');
     });
 </script>

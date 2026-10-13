@@ -28,6 +28,27 @@ To run this application locally, ensure you have a local web server environment 
 * [XAMPP](https://www.apachefriends.org/) / [WAMP](https://www.wampserver.com/en/) / [MAMP](https://www.mamp.info/)
 * Web browser (Google Chrome, Mozilla Firefox, Brave, etc.)
 
+## Authentication and employee management setup
+
+The employee module follows the supplied schema: `employees.department_id` references
+`employee_departments.id`, while academic courses and students continue to use the separate
+`department` table.
+
+1. Import `university_management (3).sql` into the `university_management` database.
+2. Apply `database/employee_management_constraints.sql` once. It adds the missing users
+   auto-increment/unique indexes and restrictive employee foreign keys without adding columns.
+3. Confirm the credentials in `config/database.php` match the local MySQL server.
+4. Create the first login interactively (the password is hashed with PHP's current default):
+
+```bash
+php scripts/create_admin.php
+```
+
+5. Open `/versity_management_DBMS/login.php` and sign in with the username or email.
+
+If the constraint script reports duplicate or orphan data, resolve those rows first and run it
+again. Department and designation deletion is blocked whenever an employee references the row.
+
 ---
 
 ## 💻 Installation & Setup Guide

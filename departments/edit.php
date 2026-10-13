@@ -1,6 +1,7 @@
 <?php
 require_once "../config/database.php";
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/security.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
@@ -12,6 +13,7 @@ if (!$id) {
 $message = "";
 
 if (isset($_POST['submit'])) {
+    verify_csrf();
     $department_name = trim($_POST['department_name'] ?? '');
     $department_code = trim($_POST['department_code'] ?? '');
     $slug            = trim($_POST['slug'] ?? '');
@@ -75,7 +77,7 @@ require_once __DIR__ . '/../includes/navbar.php';
                     <a href="index.php" class="btn btn-secondary btn-sm">Back</a>
                 </div>
                 <div class="card-body p-4">
-                    <form action="edit.php?id=<?= $id ?>" method="post">
+                    <form action="edit.php?id=<?= $id ?>" method="post"><?= csrf_field() ?>
                         <div class="mb-3">
                             <label class="form-label">Department Name</label>
                             <input type="text" class="form-control" id="department_name" name="department_name" value="<?= htmlspecialchars($department['department_name']) ?>" required>

@@ -1,9 +1,11 @@
 <?php
 require_once "../config/database.php";
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/security.php';
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../includes/navbar.php';
 
+$notice = pull_flash();
 $query = "SELECT * FROM department ORDER BY id DESC";
 $result = mysqli_query($conn, $query);
 ?>
@@ -14,6 +16,8 @@ $result = mysqli_query($conn, $query);
         <h2>Department List</h2>
         <a href="create.php" class="btn btn-primary">+ Add New Department</a>
     </div>
+
+    <?php if ($notice): ?><div class="alert alert-<?= htmlspecialchars($notice['type']) ?> alert-dismissible fade show"><?= htmlspecialchars($notice['message']) ?><button class="btn-close" data-bs-dismiss="alert"></button></div><?php endif; ?>
 
     <?php if (isset($_GET['status'])): ?>
         <div id="status-alert" class="alert alert-success alert-dismissible fade show">
@@ -58,8 +62,12 @@ $result = mysqli_query($conn, $query);
                                 <?php endif; ?>
                             </td>
                             <td>
+                                <a href="view.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-info text-white">View</a>
                                 <a href="edit.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                                <a href="delete.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                <form class="d-inline" method="post" action="delete.php" onsubmit="return confirm('Delete this department?')">
+                                    <?= csrf_field() ?><input type="hidden" name="id" value="<?= $row['id'] ?>">
+                                    <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endwhile; ?>
