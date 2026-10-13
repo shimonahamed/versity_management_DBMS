@@ -547,8 +547,12 @@ body {
 
 /* Dashboard overview */
 .dashboard-overview {
-    max-width: 1440px;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
 }
+
+.dashboard-main { padding-left: 16px; padding-right: 16px; }
 
 .dashboard-hero {
     min-height: 190px;
@@ -643,6 +647,34 @@ body {
 .registrations-card .overview-icon { color: #e47c18; background: #fff2df; }
 .semesters-card .overview-icon { color: #db3b73; background: #ffebf2; }
 .sessions-card .overview-icon { color: #1596ad; background: #e3f7fa; }
+
+.dashboard-chart-card { padding: 22px; border: 1px solid #e7edf5; border-radius: 15px; background: #fff; box-shadow: 0 4px 14px rgba(15,23,42,.04); }
+.chart-card-heading { display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid #edf1f5; }
+.chart-card-heading h3 { margin: 0 0 4px; font-size: 17px; font-weight: 700; }
+.chart-card-heading p { margin: 0; color: #8390a4; font-size: 12px; }
+.chart-card-heading > i { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; color: #3977c9; background: #edf5ff; }
+.status-chart-wrap { min-height: 245px; display: flex; align-items: center; justify-content: center; gap: 26px; }
+.status-donut { width: 150px; height: 150px; flex: 0 0 150px; display: grid; place-items: center; border-radius: 50%; position: relative; }
+.status-donut::after { content: ''; width: 94px; height: 94px; position: absolute; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px #edf1f5; }
+.status-donut > div { position: relative; z-index: 1; text-align: center; }
+.status-donut strong { display: block; font-size: 27px; line-height: 1; }
+.status-donut span { color: #8490a2; font-size: 11px; }
+.chart-legend { min-width: 120px; display: grid; gap: 11px; }
+.chart-legend span { display: grid; grid-template-columns: 9px 1fr auto; align-items: center; gap: 7px; color: #667287; font-size: 12px; }
+.chart-legend i { width: 8px; height: 8px; border-radius: 50%; }
+.chart-legend strong { color: #253047; }
+.legend-green { background: #20a66a; }.legend-gray { background: #94a3b8; }.legend-yellow { background: #f0a329; }.legend-red { background: #dc4b5f; }
+.bar-chart { padding-top: 19px; display: grid; gap: 15px; }
+.bar-row > div:first-child { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 6px; color: #566176; font-size: 12px; }
+.bar-row strong { color: #263149; }
+.bar-track { height: 8px; overflow: hidden; border-radius: 20px; background: #edf1f6; }
+.bar-track span { min-width: 3px; height: 100%; display: block; border-radius: inherit; background: linear-gradient(90deg,#3679d4,#56a5e9); }
+.chart-empty { padding: 70px 0; color: #8490a2; text-align: center; }
+.record-chart { padding-top: 21px; display: grid; gap: 23px; }
+.record-bar { display: grid; grid-template-columns: 84px 1fr 35px; align-items: center; gap: 10px; color: #596579; font-size: 12px; }
+.record-bar .bar-track { height: 11px; }
+.record-bar .bar-track i { min-width: 3px; height: 100%; display: block; border-radius: inherit; }
+.record-bar strong { color: #253047; text-align: right; }
 
 
 /* ========================================
@@ -760,6 +792,9 @@ body.sidebar-collapsed .submenu-arrow {
     .portal-welcome h1 { font-size: 30px; }
     .portal-welcome p { font-size: 22px; }
     .portal-credit { margin-top: 24px; }
+    .dashboard-main { padding-left: 12px; padding-right: 12px; }
+    .status-chart-wrap { flex-direction: column; padding: 22px 0; }
+    .chart-legend { width: min(220px,100%); }
 
     .sidebar {
         width: 250px;
