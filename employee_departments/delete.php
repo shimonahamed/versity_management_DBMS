@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 verify_csrf();
 $id = (int)($_POST['id'] ?? 0);
-$check = mysqli_prepare($conn, 'SELECT COUNT(*) total FROM employees WHERE department_id=?');
+$check = mysqli_prepare($conn, 'SELECT COUNT(*) total FROM employees WHERE employee_department_id=?');
 mysqli_stmt_bind_param($check, 'i', $id);
 mysqli_stmt_execute($check);
 $total = (int)(mysqli_fetch_assoc(mysqli_stmt_get_result($check))['total'] ?? 0);

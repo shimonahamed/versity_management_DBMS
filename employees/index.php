@@ -2,7 +2,9 @@
 require_once '../config/database.php';
 require_once '../includes/auth.php';
 require_once '../includes/security.php';
-$result = mysqli_query($conn, 'SELECT e.*,d.name department_name,g.name designation_name FROM employees e LEFT JOIN employee_departments d ON d.id=e.department_id LEFT JOIN employee_designations g ON g.id=e.designation_id ORDER BY e.sort_order,e.id DESC');
+$result = mysqli_query($conn, 'SELECT e.*,d.name department_name,g.name designation_name FROM employees e 
+LEFT JOIN employee_departments d ON d.id=e.employee_department_id 
+LEFT JOIN employee_designations g ON g.id=e.employee_designation_id ORDER BY e.sort_order,e.id DESC');
 $notice = pull_flash();
 $statusLabels = [0 => ['Inactive', 'secondary'], 1 => ['Active', 'success'], 2 => ['Resigned', 'warning'], 3 => ['Terminated', 'danger']];
 require_once '../includes/header.php';

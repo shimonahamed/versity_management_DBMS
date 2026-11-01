@@ -2,7 +2,7 @@
 require_once '../config/database.php';
 require_once '../includes/auth.php';
 require_once '../includes/security.php';
-$result = mysqli_query($conn, 'SELECT d.*,(SELECT COUNT(*) FROM employees e WHERE e.designation_id=d.id) employee_count FROM employee_designations d ORDER BY d.id DESC');
+$result = mysqli_query($conn, 'SELECT d.*,(SELECT COUNT(*) FROM employees e WHERE e.employee_designation_id=d.id) employee_count FROM employee_designations d ORDER BY d.id DESC');
 $notice = pull_flash();
 require_once '../includes/header.php';
 require_once '../includes/navbar.php'; ?>

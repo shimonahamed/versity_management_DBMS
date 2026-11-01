@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 13, 2026 at 10:44 AM
+-- Generation Time: Nov 01, 2026 at 09:09 AM
 -- Server version: 8.0.46-0ubuntu0.22.04.4
 -- PHP Version: 8.2.33
 
@@ -20,6 +20,76 @@ SET time_zone = "+00:00";
 --
 -- Database: `university_management`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bacth`
+--
+
+CREATE TABLE `bacth` (
+  `id` int UNSIGNED NOT NULL,
+  `batch_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch_code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `bacth`
+--
+
+INSERT INTO `bacth` (`id`, `batch_name`, `batch_code`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'kkk', '01', 1, '2026-10-25 05:05:30', '2026-10-25 05:05:30'),
+(2, 'yyyy', '545', 1, '2026-10-25 05:05:40', '2026-10-25 05:05:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `batch`
+--
+
+CREATE TABLE `batch` (
+  `id` int UNSIGNED NOT NULL,
+  `batch_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1=Active, 0=Inactive',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class_routines`
+--
+
+CREATE TABLE `class_routines` (
+  `id` bigint UNSIGNED NOT NULL,
+  `semester_id` bigint UNSIGNED NOT NULL,
+  `department_id` bigint UNSIGNED NOT NULL,
+  `program_id` bigint UNSIGNED NOT NULL,
+  `course_id` bigint UNSIGNED NOT NULL,
+  `teacher_id` bigint UNSIGNED NOT NULL,
+  `room_id` bigint UNSIGNED DEFAULT NULL,
+  `day_of_week` tinyint UNSIGNED NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `effective_from` date DEFAULT NULL,
+  `effective_to` date DEFAULT NULL,
+  `status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `remarks` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `class_routines`
+--
+
+INSERT INTO `class_routines` (`id`, `semester_id`, `department_id`, `program_id`, `course_id`, `teacher_id`, `room_id`, `day_of_week`, `start_time`, `end_time`, `effective_from`, `effective_to`, `status`, `remarks`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, 4, 1, 1, 1, '10:42:00', '11:42:00', '2026-10-20', '2026-10-20', 1, 'gfg', '2026-10-19 04:43:06', '2026-10-19 04:43:06');
 
 -- --------------------------------------------------------
 
@@ -147,8 +217,8 @@ CREATE TABLE `employees` (
   `gender` tinyint UNSIGNED NOT NULL DEFAULT '1' COMMENT '1=Male, 2=Female, 3=Other',
   `marital_status` tinyint UNSIGNED NOT NULL DEFAULT '1' COMMENT '1=Married, 2=Unmarried',
   `religion` tinyint UNSIGNED NOT NULL DEFAULT '1' COMMENT '1=Islam, 2=Hindu, 3=Buddhist, 4=Christian',
-  `designation_id` bigint UNSIGNED DEFAULT NULL,
-  `department_id` bigint UNSIGNED DEFAULT NULL,
+  `employee_designation_id` bigint UNSIGNED DEFAULT NULL,
+  `employee_department_id` bigint UNSIGNED DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
   `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -163,7 +233,7 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `user_id`, `sort_order`, `employee_id`, `name`, `email`, `father_name`, `mother_name`, `joining_date`, `resign_date`, `terminate_date`, `gender`, `marital_status`, `religion`, `designation_id`, `department_id`, `date_of_birth`, `phone`, `nid`, `employee_type`, `status`, `photo`, `created_at`, `updated_at`) VALUES
+INSERT INTO `employees` (`id`, `user_id`, `sort_order`, `employee_id`, `name`, `email`, `father_name`, `mother_name`, `joining_date`, `resign_date`, `terminate_date`, `gender`, `marital_status`, `religion`, `employee_designation_id`, `employee_department_id`, `date_of_birth`, `phone`, `nid`, `employee_type`, `status`, `photo`, `created_at`, `updated_at`) VALUES
 (1, NULL, 78, '1236', 'JIbon', 'ruzuma@mailinator.com', 'Kenneth Kirkland', 'Wang Gould', '2018-12-30', '2022-01-10', '2023-06-01', 1, 1, 1, 1, 1, '1986-06-06', '+1 (476) 788-3808', '123458', 1, 1, NULL, '2026-10-13 09:57:54', '2026-10-13 09:57:54');
 
 -- --------------------------------------------------------
@@ -207,6 +277,56 @@ CREATE TABLE `employee_designations` (
 
 INSERT INTO `employee_designations` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'JR Instracture', 1, '2026-10-13 09:55:30', '2026-10-13 09:55:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `programs`
+--
+
+CREATE TABLE `programs` (
+  `id` int UNSIGNED NOT NULL,
+  `department_id` bigint UNSIGNED NOT NULL,
+  `program_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `program_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `academic_program_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1=Active, 0=Inactive',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `programs`
+--
+
+INSERT INTO `programs` (`id`, `department_id`, `program_name`, `program_code`, `academic_program_name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 6, 'Barclay Mays', 'Rerum duis est aliqu', 'Farrah Kinney', 1, '2026-10-19 04:42:08', '2026-10-19 04:42:08');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rooms`
+--
+
+CREATE TABLE `rooms` (
+  `id` bigint UNSIGNED NOT NULL,
+  `building_name` bigint UNSIGNED DEFAULT NULL,
+  `room_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `room_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `floor_number` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `capacity` smallint UNSIGNED NOT NULL DEFAULT '0',
+  `status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `rooms`
+--
+
+INSERT INTO `rooms` (`id`, `building_name`, `room_number`, `room_name`, `floor_number`, `capacity`, `status`, `description`, `created_at`, `updated_at`) VALUES
+(1, 42, '560', 'Castor Mills', '156', 7675, 1, 'Minim excepteur nihi', '2026-10-19 04:42:27', '2026-10-19 04:42:27');
 
 -- --------------------------------------------------------
 
@@ -277,6 +397,8 @@ CREATE TABLE `students` (
   `student_gender` enum('Male','Female','Other') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `department_id` int UNSIGNED NOT NULL,
   `session_id` int UNSIGNED NOT NULL,
+  `batch_id` int UNSIGNED NOT NULL,
+  `program_id` bigint UNSIGNED NOT NULL,
   `admission_date` date DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
   `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -289,37 +411,37 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `student_id`, `student_name`, `student_email`, `student_phone`, `student_gender`, `department_id`, `session_id`, `admission_date`, `date_of_birth`, `address`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'CSE-21-001', 'Md Rakibul Islam', 'rakibul.islam@example.com', '01711111111', 'Male', 1, 1, '2021-01-15', '2000-05-10', 'Mirpur, Dhaka', 1, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
-(2, 'CSE-21-002', 'Fahmida Akter', 'fahmida.akter@example.com', '01711111112', 'Female', 1, 1, '2021-01-15', '2000-07-22', 'Dhanmondi, Dhaka', 1, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
-(3, 'EEE-22-001', 'Tanvir Ahmed', 'tanvir.ahmed@example.com', '01711111113', 'Male', 2, 2, '2022-01-20', '2001-03-18', 'Uttara, Dhaka', 1, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
-(4, 'BBA-22-001', 'Sumaiya Rahman', 'sumaiya.rahman@example.com', '01711111114', 'Female', 3, 2, '2022-01-20', '2001-09-05', 'Banani, Dhaka', 1, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
-(5, 'CSE-23-001', 'Arifin Hasan', 'arifin.hasan@example.com', '01711111115', 'Male', 1, 3, '2023-01-10', '2002-11-30', 'Mohammadpur, Dhaka', 1, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
-(6, 'CE-23-001', 'Nusrat Jahan', 'nusrat.jahan@example.com', '01711111116', 'Female', 5, 3, '2023-01-10', '2002-02-14', 'Badda, Dhaka', 2, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
-(7, 'ENG-24-001', 'Shakil Ahmed', 'shakil.ahmed@example.com', '01711111117', 'Male', 4, 4, '2024-01-05', '2003-06-25', 'Gulshan, Dhaka', 1, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
-(8, 'CSE-20-001', 'Jannatul Ferdous', 'jannatul.ferdous@example.com', '01711111118', 'Female', 1, 1, '2020-01-12', '1999-12-08', 'Farmgate, Dhaka', 3, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
-(9, 'CSE-26-001', 'Md Rakibul Islam', 'rakibul.islam@example.com', '01711111111', 'Male', 1, 1, '2026-01-15', '2000-05-10', 'Mirpur, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
-(10, 'CSE-26-002', 'Fahmida Akter', 'fahmida.akter@example.com', '01711111112', 'Female', 1, 1, '2026-01-15', '2000-07-22', 'Dhanmondi, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
-(11, 'EEE-26-001', 'Tanvir Ahmed', 'tanvir.ahmed@example.com', '01711111113', 'Male', 2, 1, '2026-01-15', '2001-03-18', 'Uttara, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
-(12, 'BBA-26-001', 'Sumaiya Rahman', 'sumaiya.rahman@example.com', '01711111114', 'Female', 3, 2, '2026-05-01', '2001-09-05', 'Banani, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
-(13, 'BBA-26-002', 'Arifin Hasan', 'arifin.hasan@example.com', '01711111115', 'Male', 3, 2, '2026-05-01', '2002-11-30', 'Mohammadpur, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
-(14, 'CE-26-001', 'Nusrat Jahan', 'nusrat.jahan@example.com', '01711111116', 'Female', 5, 2, '2026-05-01', '2002-02-14', 'Badda, Dhaka', 2, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
-(15, 'ENG-26-001', 'Shakil Ahmed', 'shakil.ahmed@example.com', '01711111117', 'Male', 4, 3, '2026-09-01', '2003-06-25', 'Gulshan, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
-(16, 'CSE-25-001', 'Jannatul Ferdous', 'jannatul.ferdous@example.com', '01711111118', 'Female', 1, 3, '2025-09-01', '1999-12-08', 'Farmgate, Dhaka', 3, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
-(17, 'EEE-25-001', 'Rezaul Karim', 'rezaul.karim@example.com', '01711111119', 'Male', 2, 3, '2025-09-01', '2000-08-14', 'Mohakhali, Dhaka', 4, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
-(18, 'CE-26-002', 'Tasnim Akter', 'tasnim.akter@example.com', '01711111120', 'Female', 5, 1, '2026-01-15', '2001-04-27', 'Rampura, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
-(19, 'CSE-26-003', 'Imran Hossain', 'imran.hossain@example.com', '01711111121', 'Male', 1, 2, '2026-05-01', '2001-01-19', 'Bashundhara, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
-(20, 'CSE-26-004', 'Nadia Islam', 'nadia.islam@example.com', '01711111122', 'Female', 1, 3, '2026-09-01', '2002-03-11', 'Khilgaon, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
-(21, 'EEE-26-002', 'Shahriar Kabir', 'shahriar.kabir@example.com', '01711111123', 'Male', 2, 2, '2026-05-01', '2001-06-30', 'Malibagh, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
-(22, 'EEE-26-003', 'Farzana Yasmin', 'farzana.yasmin@example.com', '01711111124', 'Female', 2, 3, '2026-09-01', '2002-08-09', 'Shantinagar, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
-(23, 'BBA-26-003', 'Mahmudul Hasan', 'mahmudul.hasan@example.com', '01711111125', 'Male', 3, 1, '2026-01-15', '2000-12-05', 'Tejgaon, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
-(24, 'BBA-26-004', 'Ruma Akter', 'ruma.akter@example.com', '01711111126', 'Female', 3, 3, '2026-09-01', '2001-10-17', 'Lalbagh, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
-(25, 'ENG-26-002', 'Sohanur Rahman', 'sohanur.rahman@example.com', '01711111127', 'Male', 4, 1, '2026-01-15', '2002-02-28', 'Jatrabari, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
-(26, 'ENG-25-001', 'Taslima Begum', 'taslima.begum@example.com', '01711111128', 'Female', 4, 2, '2025-05-01', '1999-11-03', 'Wari, Dhaka', 3, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
-(27, 'CE-26-003', 'Abdullah Al Noman', 'abdullah.noman@example.com', '01711111129', 'Male', 5, 3, '2026-09-01', '2001-07-22', 'Motijheel, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
-(28, 'CE-25-001', 'Sharmin Sultana', 'sharmin.sultana@example.com', '01711111130', 'Female', 5, 2, '2025-05-01', '2000-04-16', 'Paltan, Dhaka', 4, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
-(29, 'CSE-24-001', 'Zubayer Ahmed', 'zubayer.ahmed@example.com', '01711111131', 'Male', 1, 1, '2024-01-15', '1999-09-25', 'Kamalapur, Dhaka', 3, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
-(30, 'EEE-24-001', 'Kamrul Hasan', 'kamrul.hasan@example.com', '01711111132', 'Male', 2, 1, '2024-01-15', '1998-05-12', 'Azimpur, Dhaka', 4, '2026-08-27 07:15:13', '2026-08-27 07:15:13');
+INSERT INTO `students` (`id`, `student_id`, `student_name`, `student_email`, `student_phone`, `student_gender`, `department_id`, `session_id`, `batch_id`, `program_id`, `admission_date`, `date_of_birth`, `address`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'CSE-21-001', 'Md Rakibul Islam', 'rakibul.islam@example.com', '01711111111', 'Male', 1, 1, 0, 0, '2021-01-15', '2000-05-10', 'Mirpur, Dhaka', 1, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
+(2, 'CSE-21-002', 'Fahmida Akter', 'fahmida.akter@example.com', '01711111112', 'Female', 1, 1, 0, 0, '2021-01-15', '2000-07-22', 'Dhanmondi, Dhaka', 1, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
+(3, 'EEE-22-001', 'Tanvir Ahmed', 'tanvir.ahmed@example.com', '01711111113', 'Male', 2, 2, 0, 0, '2022-01-20', '2001-03-18', 'Uttara, Dhaka', 1, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
+(4, 'BBA-22-001', 'Sumaiya Rahman', 'sumaiya.rahman@example.com', '01711111114', 'Female', 3, 2, 0, 0, '2022-01-20', '2001-09-05', 'Banani, Dhaka', 1, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
+(5, 'CSE-23-001', 'Arifin Hasan', 'arifin.hasan@example.com', '01711111115', 'Male', 1, 3, 0, 0, '2023-01-10', '2002-11-30', 'Mohammadpur, Dhaka', 1, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
+(6, 'CE-23-001', 'Nusrat Jahan', 'nusrat.jahan@example.com', '01711111116', 'Female', 5, 3, 0, 0, '2023-01-10', '2002-02-14', 'Badda, Dhaka', 2, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
+(7, 'ENG-24-001', 'Shakil Ahmed', 'shakil.ahmed@example.com', '01711111117', 'Male', 4, 4, 0, 0, '2024-01-05', '2003-06-25', 'Gulshan, Dhaka', 1, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
+(8, 'CSE-20-001', 'Jannatul Ferdous', 'jannatul.ferdous@example.com', '01711111118', 'Female', 1, 1, 0, 0, '2020-01-12', '1999-12-08', 'Farmgate, Dhaka', 3, '2026-08-27 07:10:54', '2026-08-27 07:10:54'),
+(9, 'CSE-26-001', 'Md Rakibul Islam', 'rakibul.islam@example.com', '01711111111', 'Male', 1, 1, 0, 0, '2026-01-15', '2000-05-10', 'Mirpur, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
+(10, 'CSE-26-002', 'Fahmida Akter', 'fahmida.akter@example.com', '01711111112', 'Female', 1, 1, 0, 0, '2026-01-15', '2000-07-22', 'Dhanmondi, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
+(11, 'EEE-26-001', 'Tanvir Ahmed', 'tanvir.ahmed@example.com', '01711111113', 'Male', 2, 1, 0, 0, '2026-01-15', '2001-03-18', 'Uttara, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
+(12, 'BBA-26-001', 'Sumaiya Rahman', 'sumaiya.rahman@example.com', '01711111114', 'Female', 3, 2, 0, 0, '2026-05-01', '2001-09-05', 'Banani, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
+(13, 'BBA-26-002', 'Arifin Hasan', 'arifin.hasan@example.com', '01711111115', 'Male', 3, 2, 0, 0, '2026-05-01', '2002-11-30', 'Mohammadpur, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
+(14, 'CE-26-001', 'Nusrat Jahan', 'nusrat.jahan@example.com', '01711111116', 'Female', 5, 2, 0, 0, '2026-05-01', '2002-02-14', 'Badda, Dhaka', 2, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
+(15, 'ENG-26-001', 'Shakil Ahmed', 'shakil.ahmed@example.com', '01711111117', 'Male', 4, 3, 0, 0, '2026-09-01', '2003-06-25', 'Gulshan, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
+(16, 'CSE-25-001', 'Jannatul Ferdous', 'jannatul.ferdous@example.com', '01711111118', 'Female', 1, 3, 0, 0, '2025-09-01', '1999-12-08', 'Farmgate, Dhaka', 3, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
+(17, 'EEE-25-001', 'Rezaul Karim', 'rezaul.karim@example.com', '01711111119', 'Male', 2, 3, 0, 0, '2025-09-01', '2000-08-14', 'Mohakhali, Dhaka', 4, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
+(18, 'CE-26-002', 'Tasnim Akter', 'tasnim.akter@example.com', '01711111120', 'Female', 5, 1, 0, 0, '2026-01-15', '2001-04-27', 'Rampura, Dhaka', 1, '2026-08-27 07:14:07', '2026-08-27 07:14:07'),
+(19, 'CSE-26-003', 'Imran Hossain', 'imran.hossain@example.com', '01711111121', 'Male', 1, 2, 0, 0, '2026-05-01', '2001-01-19', 'Bashundhara, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
+(20, 'CSE-26-004', 'Nadia Islam', 'nadia.islam@example.com', '01711111122', 'Female', 1, 3, 0, 0, '2026-09-01', '2002-03-11', 'Khilgaon, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
+(21, 'EEE-26-002', 'Shahriar Kabir', 'shahriar.kabir@example.com', '01711111123', 'Male', 2, 2, 0, 0, '2026-05-01', '2001-06-30', 'Malibagh, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
+(22, 'EEE-26-003', 'Farzana Yasmin', 'farzana.yasmin@example.com', '01711111124', 'Female', 2, 3, 0, 0, '2026-09-01', '2002-08-09', 'Shantinagar, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
+(23, 'BBA-26-003', 'Mahmudul Hasan', 'mahmudul.hasan@example.com', '01711111125', 'Male', 3, 1, 0, 0, '2026-01-15', '2000-12-05', 'Tejgaon, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
+(24, 'BBA-26-004', 'Ruma Akter', 'ruma.akter@example.com', '01711111126', 'Female', 3, 3, 0, 0, '2026-09-01', '2001-10-17', 'Lalbagh, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
+(25, 'ENG-26-002', 'Sohanur Rahman', 'sohanur.rahman@example.com', '01711111127', 'Male', 4, 1, 0, 0, '2026-01-15', '2002-02-28', 'Jatrabari, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
+(26, 'ENG-25-001', 'Taslima Begum', 'taslima.begum@example.com', '01711111128', 'Female', 4, 2, 0, 0, '2025-05-01', '1999-11-03', 'Wari, Dhaka', 3, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
+(27, 'CE-26-003', 'Abdullah Al Noman', 'abdullah.noman@example.com', '01711111129', 'Male', 5, 3, 0, 0, '2026-09-01', '2001-07-22', 'Motijheel, Dhaka', 1, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
+(28, 'CE-25-001', 'Sharmin Sultana', 'sharmin.sultana@example.com', '01711111130', 'Female', 5, 2, 0, 0, '2025-05-01', '2000-04-16', 'Paltan, Dhaka', 4, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
+(29, 'CSE-24-001', 'Zubayer Ahmed', 'zubayer.ahmed@example.com', '01711111131', 'Male', 1, 1, 0, 0, '2024-01-15', '1999-09-25', 'Kamalapur, Dhaka', 3, '2026-08-27 07:15:13', '2026-08-27 07:15:13'),
+(30, 'EEE-24-001', 'Kamrul Hasan', 'kamrul.hasan@example.com', '01711111132', 'Male', 2, 1, 0, 0, '2024-01-15', '1998-05-12', 'Azimpur, Dhaka', 4, '2026-08-27 07:15:13', '2026-08-27 07:15:13');
 
 -- --------------------------------------------------------
 
@@ -353,6 +475,25 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `image`, `phone`, `s
 --
 
 --
+-- Indexes for table `bacth`
+--
+ALTER TABLE `bacth`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `bacth_batch_code_unique` (`batch_code`);
+
+--
+-- Indexes for table `batch`
+--
+ALTER TABLE `batch`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `class_routines`
+--
+ALTER TABLE `class_routines`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `course`
 --
 ALTER TABLE `course`
@@ -377,7 +518,9 @@ ALTER TABLE `department`
 -- Indexes for table `employees`
 --
 ALTER TABLE `employees`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_employee_designation` (`employee_designation_id`),
+  ADD KEY `fk_employee_department` (`employee_department_id`);
 
 --
 -- Indexes for table `employee_departments`
@@ -390,6 +533,14 @@ ALTER TABLE `employee_departments`
 --
 ALTER TABLE `employee_designations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rooms`
+--
+ALTER TABLE `rooms`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_room_building` (`room_number`),
+  ADD KEY `idx_room_status` (`status`);
 
 --
 -- Indexes for table `semester`
@@ -415,6 +566,24 @@ ALTER TABLE `students`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `bacth`
+--
+ALTER TABLE `bacth`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `batch`
+--
+ALTER TABLE `batch`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `class_routines`
+--
+ALTER TABLE `class_routines`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `course`
@@ -453,6 +622,12 @@ ALTER TABLE `employee_designations`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `rooms`
+--
+ALTER TABLE `rooms`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `semester`
 --
 ALTER TABLE `semester`
@@ -469,6 +644,17 @@ ALTER TABLE `session`
 --
 ALTER TABLE `students`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `employees`
+--
+ALTER TABLE `employees`
+  ADD CONSTRAINT `fk_employee_department` FOREIGN KEY (`employee_department_id`) REFERENCES `employee_departments` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_employee_designation` FOREIGN KEY (`employee_designation_id`) REFERENCES `employee_designations` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

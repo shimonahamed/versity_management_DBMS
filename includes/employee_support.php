@@ -17,8 +17,8 @@ function employee_input(array $source): array
         'gender' => (int)($source['gender'] ?? 1),
         'marital_status' => (int)($source['marital_status'] ?? 1),
         'religion' => (int)($source['religion'] ?? 1),
-        'designation_id' => (int)($source['designation_id'] ?? 0),
-        'department_id' => (int)($source['department_id'] ?? 0),
+        'employee_designation_id' => (int)($source['employee_designation_id'] ?? 0),
+        'employee_department_id' => (int)($source['employee_department_id'] ?? 0),
         'date_of_birth' => trim((string)($source['date_of_birth'] ?? '')),
         'phone' => trim((string)($source['phone'] ?? '')),
         'nid' => trim((string)($source['nid'] ?? '')),
@@ -49,7 +49,7 @@ function validate_employee(mysqli $conn, array $data, int $ignoreId = 0): array
     if ($data['date_of_birth'] !== '' && $data['joining_date'] !== '' && $data['date_of_birth'] > $data['joining_date']) $errors[] = 'Date of birth must be before joining date.';
     if ($data['resign_date'] !== '' && $data['joining_date'] !== '' && $data['resign_date'] < $data['joining_date']) $errors[] = 'Resign date cannot be before joining date.';
     if ($data['terminate_date'] !== '' && $data['joining_date'] !== '' && $data['terminate_date'] < $data['joining_date']) $errors[] = 'Terminate date cannot be before joining date.';
-    foreach (['employee_departments' => $data['department_id'], 'employee_designations' => $data['designation_id']] as $table => $id) {
+    foreach (['employee_departments' => $data['employee_department_id'], 'employee_designations' => $data['employee_designation_id']] as $table => $id) {
         $stmt = mysqli_prepare($conn, "SELECT id FROM $table WHERE id=?");
         mysqli_stmt_bind_param($stmt, 'i', $id);
         mysqli_stmt_execute($stmt);
@@ -74,12 +74,12 @@ function employee_options(mysqli $conn): array
 
 function employee_values(array $d): array
 {
-    return [$d['sort_order'], null_if_empty($d['employee_id']), $d['name'], null_if_empty($d['email']), $d['father_name'], $d['mother_name'], null_if_empty($d['joining_date']), null_if_empty($d['resign_date']), null_if_empty($d['terminate_date']), $d['gender'], $d['marital_status'], $d['religion'], $d['designation_id'], $d['department_id'], null_if_empty($d['date_of_birth']), null_if_empty($d['phone']), null_if_empty($d['nid']), $d['employee_type'], $d['status']];
+    return [$d['sort_order'], null_if_empty($d['employee_id']), $d['name'], null_if_empty($d['email']), $d['father_name'], $d['mother_name'], null_if_empty($d['joining_date']), null_if_empty($d['resign_date']), null_if_empty($d['terminate_date']), $d['gender'], $d['marital_status'], $d['religion'], $d['employee_designation_id'], $d['employee_department_id'], null_if_empty($d['date_of_birth']), null_if_empty($d['phone']), null_if_empty($d['nid']), $d['employee_type'], $d['status']];
 }
 
 function insert_employee(mysqli $conn, array $d): bool
 {
-    $stmt = mysqli_prepare($conn, 'INSERT INTO employees(sort_order,employee_id,name,email,father_name,mother_name,joining_date,resign_date,terminate_date,gender,marital_status,religion,designation_id,department_id,date_of_birth,phone,nid,employee_type,status,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW())');
+    $stmt = mysqli_prepare($conn, 'INSERT INTO employees(sort_order,employee_id,name,email,father_name,mother_name,joining_date,resign_date,terminate_date,gender,marital_status,religion,employee_designation_id,employee_department_id,date_of_birth,phone,nid,employee_type,status,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW())');
     $v = employee_values($d);
     mysqli_stmt_bind_param($stmt, 'issssssssiiiiisssii', ...$v);
     $ok = mysqli_stmt_execute($stmt);
@@ -89,7 +89,7 @@ function insert_employee(mysqli $conn, array $d): bool
 
 function update_employee(mysqli $conn, array $d, int $id): bool
 {
-    $stmt = mysqli_prepare($conn, 'UPDATE employees SET sort_order=?,employee_id=?,name=?,email=?,father_name=?,mother_name=?,joining_date=?,resign_date=?,terminate_date=?,gender=?,marital_status=?,religion=?,designation_id=?,department_id=?,date_of_birth=?,phone=?,nid=?,employee_type=?,status=?,updated_at=NOW() WHERE id=?');
+    $stmt = mysqli_prepare($conn, 'UPDATE employees SET sort_order=?,employee_id=?,name=?,email=?,father_name=?,mother_name=?,joining_date=?,resign_date=?,terminate_date=?,gender=?,marital_status=?,religion=?,employee_designation_id=?,employee_department_id=?,date_of_birth=?,phone=?,nid=?,employee_type=?,status=?,updated_at=NOW() WHERE id=?');
     $v = employee_values($d);
     $v[] = $id;
     mysqli_stmt_bind_param($stmt, 'issssssssiiiiisssiii', ...$v);
